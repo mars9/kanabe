@@ -19,7 +19,7 @@ var (
 	forecast10 = flag.Bool("f10", false, "reports the current (10-day) forecast")
 
 	apiKey  string
-	station string = "Innsbruck, AT"
+	station = "Innsbruck, AT"
 )
 
 type Response struct {
@@ -53,7 +53,7 @@ type Location struct {
 	Elevation string
 }
 
-var ConditionsTmpl string = `{{if .Response.Error.Type}}Error: {{.Response.Error.Description}}{{else}}
+var ConditionsTmpl = `{{if .Response.Error.Type}}Error: {{.Response.Error.Description}}{{else}}
 Conditions at ` + station + `:
   Latitude:   {{.Current_observation.Display_location.Latitude}}
   Longitude:  {{.Current_observation.Display_location.Longitude}}
@@ -87,7 +87,7 @@ type Forecastday struct {
 	Fcttext_metric string
 }
 
-var ForecastTmpl string = `{{if .Response.Error.Type}}Error: {{.Response.Error.Description}}{{else}}
+var ForecastTmpl = `{{if .Response.Error.Type}}Error: {{.Response.Error.Description}}{{else}}
 Forecast for ` + station + `:
 {{range $i, $e := .Forecast.Txt_forecast.Forecastday}}  {{$e.Title}}:
     {{$e.Fcttext_metric}}

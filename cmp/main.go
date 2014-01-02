@@ -13,11 +13,9 @@ import (
 	"strconv"
 )
 
-const BUF = 65536
-
 var (
-	Lflag = flag.Bool("L", false, "print the line number of the differing byte")
-	lflag = flag.Bool("l", false, "print the byte number and the differing\n"+
+	lflag = flag.Bool("L", false, "print the line number of the differing byte")
+	bflag = flag.Bool("l", false, "print the byte number and the differing\n"+
 		"            bytes for each difference")
 	silent = flag.Bool("s", false, "reporting through the exit status")
 )
@@ -77,8 +75,8 @@ func main() {
 	var nc uint64 = 1
 	var l uint64 = 1
 	len1, len2 := 0, 0
-	buf1 := make([]byte, BUF)
-	buf2 := make([]byte, BUF)
+	buf1 := make([]byte, 65536)
+	buf2 := make([]byte, 65536)
 	for {
 		n1, err := f1.Read(buf1)
 		if err != nil {
@@ -111,8 +109,8 @@ func main() {
 				if *silent {
 					os.Exit(1)
 				}
-				if !*lflag {
-					if *Lflag {
+				if !*bflag {
+					if *lflag {
 						fmt.Printf("%s %s differ: char %d line %d\n",
 							name1, name2, nc+uint64(i), l)
 						os.Exit(1)

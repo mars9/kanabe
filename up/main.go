@@ -145,7 +145,6 @@ func update(srcPath string, src os.FileInfo, err error) error {
 			} else {
 				cp(dstPath, srcPath, false, false)
 			}
-			return nil
 		} else {
 			res, err := cmp(srcPath, dstPath)
 			if err != nil {
