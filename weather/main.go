@@ -54,7 +54,6 @@ type Location struct {
 }
 
 var ConditionsTmpl = `{{if .Response.Error.Type}}Error: {{.Response.Error.Description}}{{else}}
-Conditions at ` + station + `:
   Latitude:   {{.Current_observation.Display_location.Latitude}}
   Longitude:  {{.Current_observation.Display_location.Longitude}}
   Elevation:  {{.Current_observation.Display_location.Elevation}}m
@@ -88,7 +87,6 @@ type Forecastday struct {
 }
 
 var ForecastTmpl = `{{if .Response.Error.Type}}Error: {{.Response.Error.Description}}{{else}}
-Forecast for ` + station + `:
 {{range $i, $e := .Forecast.Txt_forecast.Forecastday}}  {{$e.Title}}:
     {{$e.Fcttext_metric}}
 
