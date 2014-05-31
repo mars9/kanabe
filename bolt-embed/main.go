@@ -50,6 +50,9 @@ func main() {
 	if len(os.Args) != 2 {
 		usage()
 	}
+	if os.Args[1] == "-h" {
+		usage()
+	}
 
 	tmp, rev, err := fetch()
 	defer os.RemoveAll(tmp)
