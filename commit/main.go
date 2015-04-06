@@ -54,10 +54,10 @@ func main() {
 	if len(os.Args) == 2 {
 		msg = os.Args[1]
 	}
-	err := mercurial(msg)
+	err := git(msg)
 	if err != nil {
 		if _, ok := err.(perror); ok {
-			if err = git(msg); err != nil {
+			if err = mercurial(msg); err != nil {
 				if _, ok := err.(perror); ok {
 					fmt.Fprintf(os.Stderr, "%s: not a hg/git repository\n", os.Args[0])
 					os.Exit(0)
