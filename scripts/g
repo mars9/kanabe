@@ -1,0 +1,41 @@
+#!/bin/sh
+
+inflags=yes
+flags=""
+while [ $# != 0 -a $inflags = yes ]
+do
+	case "$1" in
+	--)
+		inflags=no
+		shift
+		;;
+	-*)
+		flags="$flags $1"
+		shift
+		;;
+	-)
+		inflags=no
+		shift
+		;;
+	*)
+		inflags=no
+		;;
+	esac
+done
+
+case $# in
+0)
+	echo 1>&2 'usage: g [flags] pattern [files]'
+	exit 1
+	;;
+1)
+	pattern="$1"
+	files=`/bin/ls *.[chs] *.go *.cc *.py *.tex *.java *.asm 2>/dev/null`
+	;;
+*)
+	pattern="$1"
+	shift
+	files="$@"
+esac
+
+grep -n $flags -- "$pattern" $files /dev/null
